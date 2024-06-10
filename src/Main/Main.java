@@ -1,10 +1,15 @@
+package Main;
+
+import Model.Financing;
+import Util.InterfaceUser;
+
 public class Main {
     public static void main(String[] args) {
         InterfaceUser interfaceUser = new InterfaceUser();
 
-        double propertyValue = interfaceUser.getPropertyValue();
-        int financingTerm = interfaceUser.getFinancingTerm();
-        double annualInterestRate = interfaceUser.getAnnualInterestRate();
+        double propertyValue = interfaceUser.inputPropertyValue();
+        int financingTerm = interfaceUser.inputFinancingTerm();
+        double annualInterestRate = interfaceUser.inputAnnualInterestRate();
 
         Financing financing = new Financing(propertyValue, financingTerm, annualInterestRate);
 
