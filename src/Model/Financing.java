@@ -1,5 +1,7 @@
 package Model;
 
+import java.text.NumberFormat;
+
 public class Financing {
     private double propertyValue;   // valor do imóvel
     private int financingTerm;  // prazo do financiamento
@@ -24,18 +26,19 @@ public class Financing {
     }
 
     public double calcMonthlyPayment(){
-        return propertyValue / (financingTerm * 12) * (1 + annualInterestRate / 12);
+        return (this.propertyValue / (this.financingTerm * 12)) * (1 + this.annualInterestRate / 12);
+        //return this.propertyValue / (this.financingTerm * 12) * (1 + (this.annualInterestRate / 100) / 12);
     }
 
     public double calcTotalPayment(){
-        return this.calcMonthlyPayment() * financingTerm * 12;
+        return this.calcMonthlyPayment() * this.financingTerm * 12;
     }
 
     public void showFinancingData(){
-        System.out.println("Property value: " + this.propertyValue);
-        System.out.println("Financing term: " + this.financingTerm);
-        System.out.println("Annual interest rate: " + this.annualInterestRate);
-        System.out.println("Monthly payment of financing: " + calcMonthlyPayment());
-        System.out.println("Total payment of financing: " + calcTotalPayment());
+        System.out.println("Property value: R$ " + NumberFormat.getCurrencyInstance().format(this.propertyValue));
+        System.out.println("Financing term: " + this.financingTerm  + " year(s)");
+        System.out.println("Annual interest rate: " +  this.annualInterestRate + '%'); //NumberFormat.getPercentInstance().format(this.annualInterestRate)
+        System.out.println("Monthly payment of financing: R$ " + NumberFormat.getCurrencyInstance().format(calcMonthlyPayment()));
+        System.out.println("Total payment of financing: R$ " + NumberFormat.getCurrencyInstance().format(calcTotalPayment()));
     }
 }
