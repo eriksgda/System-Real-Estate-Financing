@@ -13,14 +13,23 @@ public class Main {
 
         InterfaceUser interfaceUser = new InterfaceUser();
 
-        for (int i = 0; i < 4; i++){
-            double propertyValue = interfaceUser.inputPropertyValue();
-            int financingTerm = interfaceUser.inputFinancingTerm();
-            double annualInterestRate = interfaceUser.inputAnnualInterestRate();
+        double propertyValue = interfaceUser.inputPropertyValue();
+        int financingTerm = interfaceUser.inputFinancingTerm();
+        double annualInterestRate = interfaceUser.inputAnnualInterestRate();
+        Financing firstApartmentFinancing = new Model.Apartment(propertyValue, financingTerm, annualInterestRate);
+        financingList.add(firstApartmentFinancing);
 
-            Financing financing = new Financing(propertyValue, financingTerm, annualInterestRate);
-            financingList.add(financing);
-        }
+        Financing secondApartmentFinancing = new Model.Apartment(1000000,15,10);
+        financingList.add(secondApartmentFinancing);
+
+        Financing firstHomeFinancing = new Model.Home(500000, 10, 10);
+        financingList.add(firstHomeFinancing);
+
+        Financing secondHomeFinancing = new Model.Home(1500000, 5, 12);
+        financingList.add(secondHomeFinancing);
+
+        Financing firstLandFinancing = new Model.Land(2000000, 22,20);
+        financingList.add(firstLandFinancing);
 
         for (Financing financing : financingList){
             System.out.println();

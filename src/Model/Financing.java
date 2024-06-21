@@ -3,9 +3,15 @@ package Model;
 import java.text.NumberFormat;
 
 public class Financing {
-    private double propertyValue;   // valor do imóvel
-    private int financingTerm;  // prazo do financiamento
-    private double annualInterestRate;  // taxa de juros anual
+    protected double propertyValue;   // valor do imóvel
+    protected int financingTerm;  // prazo do financiamento
+    protected double annualInterestRate;  // taxa de juros anual
+
+    public Financing(double propertyValue, int financingTerm, double annualInterestRate){
+        this.propertyValue = propertyValue;
+        this.financingTerm = financingTerm;
+        this.annualInterestRate = annualInterestRate;
+    }
 
     public double getPropertyValue(){
         return this.propertyValue;
@@ -19,19 +25,12 @@ public class Financing {
         return this.annualInterestRate;
     }
 
-    public Financing(double propertyValue, int financingTerm, double annualInterestRate){
-        this.propertyValue = propertyValue;
-        this.financingTerm = financingTerm;
-        this.annualInterestRate = annualInterestRate;
-    }
-
     public double calcMonthlyPayment(){
-        return (this.propertyValue / (this.financingTerm * 12)) * (1 + this.annualInterestRate / 12);
-        //return this.propertyValue / (this.financingTerm * 12) * (1 + (this.annualInterestRate / 100) / 12);
+        return (getPropertyValue() / (getFinancingTerm() * 12)) * (1 + (getAnnualInterestRate() / 100) / 12);
     }
 
     public double calcTotalPayment(){
-        return this.calcMonthlyPayment() * this.financingTerm * 12;
+        return calcMonthlyPayment() * getFinancingTerm() * 12;
     }
 
     public void showFinancingData(){
