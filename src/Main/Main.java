@@ -33,7 +33,7 @@ public class Main {
 
         for (Financing financing : financingList){
             System.out.println();
-            financing.showFinancingData();
+            financing.printFinancingData();
             System.out.println("-------");
         }
 
