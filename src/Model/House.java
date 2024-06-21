@@ -1,8 +1,9 @@
 package Model;
 
-public class Home extends Financing {
+public class House extends Financing {
 
-    public Home(double propertyValue, int financingTerm, double annualInterestRate){
+
+    public House(double propertyValue, int financingTerm, double annualInterestRate){
         super(propertyValue, financingTerm, annualInterestRate);
     }
 
