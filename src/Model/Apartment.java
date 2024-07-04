@@ -32,10 +32,12 @@ public class Apartment extends Financing {
         return (getPropertyValue() * monthInterestRate) / (1 - Math.pow((1 + monthInterestRate), -months));
     }
 
+    @Override
     public double calcTotalPayment(){
         return calcMonthlyPayment() * getFinancingTerm() * 12;
     }
 
+    @Override
     public void printFinancingData(){
         System.out.println("Type  of financing: Apartment");
         System.out.println("Floor number: " + getFloorNumber());

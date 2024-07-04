@@ -23,10 +23,12 @@ public class Land extends Financing{
         return super.calcMonthlyPayment() * 1.02;
     }
 
+    @Override
     public double calcTotalPayment(){
         return calcMonthlyPayment() * getFinancingTerm() * 12;
     }
 
+    @Override
     public void printFinancingData(){
         System.out.println("Type  of financing: Land");
         System.out.println("Area type: " + getAreaType());

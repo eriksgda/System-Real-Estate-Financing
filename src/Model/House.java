@@ -29,10 +29,12 @@ public class House extends Financing {
         return super.calcMonthlyPayment() + 80;
     }
 
+    @Override
     public double calcTotalPayment(){
         return calcMonthlyPayment() * getFinancingTerm() * 12;
     }
 
+    @Override
     public void printFinancingData(){
         System.out.println("Type  of financing: House");
         System.out.println("House area: " + getHouseArea() + "m²");
