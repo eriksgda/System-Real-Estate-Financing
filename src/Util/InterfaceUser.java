@@ -3,6 +3,8 @@ package Util;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import Exceptions.InputNegativeValueException;
+
 public class InterfaceUser {
     Scanner scanner = new Scanner(System.in);
 
@@ -13,12 +15,15 @@ public class InterfaceUser {
             try{
                 value = scanner.nextDouble();
                 if (value <= 0) {
-                    System.out.println("Please enter a positive value for the Property Value.");
+                    throw new InputNegativeValueException("Please enter a positive value for the Property Value.");
                 }
             }catch (InputMismatchException exception){
                 System.out.println("Invalid input. Please enter a numeric value for the Property Value.");
                 scanner.next();
+            } catch (InputNegativeValueException exception) {
+                System.out.println(exception.getMessage());
             }
+
         }while (value <= 0);
         return value;
     }
@@ -30,12 +35,15 @@ public class InterfaceUser {
             try {
                 term = scanner.nextInt();
                 if (term <= 0){
-                    System.out.println("Please enter a positive value for the Financing Term.");
+                    throw new InputNegativeValueException("Please enter a positive value for the Financing Term.");
                 }
             } catch (InputMismatchException exception){
                 System.out.println("Invalid input. Please enter an integer value for the Financing Term.");
                 scanner.next();
+            } catch (InputNegativeValueException exception) {
+                System.out.println(exception.getMessage());
             }
+
         } while (term <= 0);
         return term;
     }
@@ -47,12 +55,15 @@ public class InterfaceUser {
             try {
                 rate = scanner.nextDouble();
                 if (rate <= 0){
-                    System.out.println("Please enter a positive value for the Annual Interest Rate.");
+                    throw new InputNegativeValueException("Please enter a positive value for the Annual Interest Rate.");
                 }
             } catch (InputMismatchException exception){
                 System.out.println("Invalid input. Please enter a numeric value for the Annual Interest Rate.");
                 scanner.next();
+            } catch (InputNegativeValueException exception) {
+                System.out.println(exception.getMessage());
             }
+
         } while (rate <= 0);
         return rate;
     }

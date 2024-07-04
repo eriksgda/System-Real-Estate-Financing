@@ -3,8 +3,8 @@ package Main;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-import Model.Financing;
-import Util.InterfaceUser;
+import Model.*;
+import Util.*;
 
 
 public class Main {
@@ -16,20 +16,20 @@ public class Main {
         double propertyValue = interfaceUser.inputPropertyValue();
         int financingTerm = interfaceUser.inputFinancingTerm();
         double annualInterestRate = interfaceUser.inputAnnualInterestRate();
-        Financing firstApartmentFinancing = new Model.Apartment(propertyValue, financingTerm, annualInterestRate, 15, 7);
+        Financing firstApartmentFinancing = new Apartment(propertyValue, financingTerm, annualInterestRate, 15, 7);
         financingList.add(firstApartmentFinancing);
 
-        Financing secondApartmentFinancing = new Model.Apartment(1000000,15,
+        Financing secondApartmentFinancing = new Apartment(1000000,15,
                 10, 50, 13);
         financingList.add(secondApartmentFinancing);
 
-        Financing firstHomeFinancing = new Model.House(500000, 10, 10, 80, 165.3);
+        Financing firstHomeFinancing = new House(500000, 10, 10, 80, 165.3);
         financingList.add(firstHomeFinancing);
 
-        Financing secondHomeFinancing = new Model.House(1500000, 5, 12, 44, 97.6);
+        Financing secondHomeFinancing = new House(1500000, 5, 12, 44, 97.6);
         financingList.add(secondHomeFinancing);
 
-        Financing firstLandFinancing = new Model.Land(2000000, 22,20, "Commercial");
+        Financing firstLandFinancing = new Land(2000000, 22,20, "Commercial");
         financingList.add(firstLandFinancing);
 
         for (Financing financing : financingList){
