@@ -38,7 +38,7 @@ public class House extends Financing {
     public void printFinancingData(){
         System.out.println("Type  of financing: House");
         System.out.println("House area: " + getHouseArea() + "m²");
-        System.out.println("Number of garage space: " + getLandArea() + "m²");
+        System.out.println("Land area: " + getLandArea() + "m²");
         System.out.println("Property value: R$ " + NumberFormat.getCurrencyInstance().format(getPropertyValue()));
         System.out.println("Financing term: " + this.financingTerm  + " year(s)");
         System.out.println("Annual interest rate: " +  this.annualInterestRate + '%'); //NumberFormat.getPercentInstance().format(this.annualInterestRate)
