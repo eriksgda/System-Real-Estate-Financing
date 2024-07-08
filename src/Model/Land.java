@@ -49,7 +49,7 @@ public class Land extends Financing{
         stringBuilder.append("Financing term: ").append(getFinancingTerm()).append(" year(s)\n");
         stringBuilder.append("Annual interest rate: ").append(getAnnualInterestRate()).append("%\n");
         stringBuilder.append("Monthly payment of financing: R$ ").append(NumberFormat.getCurrencyInstance().format(calcMonthlyPayment())).append("\n");
-        stringBuilder.append("Total payment of financing: R$ ").append(NumberFormat.getCurrencyInstance().format(calcTotalPayment())).append("\n");
+        stringBuilder.append("Total payment of financing: R$ ").append(NumberFormat.getCurrencyInstance().format(calcTotalPayment())).append("\n").append("\n");
 
         return stringBuilder.toString();
     }
