@@ -9,7 +9,7 @@ import Util.*;
 
 
 public class Main {
-
+    // write method
     public static void writeFinancing(String fileName, ArrayList<Financing> financingList){
         ObjectOutputStream outputStream;
         try {
@@ -25,7 +25,7 @@ public class Main {
             System.out.println(exception.getMessage());
         }
     }
-
+    // read method
     public static ArrayList<Financing> readFinancing(String fileName) {
         ObjectInputStream inputStream;
         ArrayList<Financing> financingList = new ArrayList<>();
@@ -69,16 +69,46 @@ public class Main {
         System.out.println("Welcome to the financing simulator!");
 
         String fileName = "src/financing.test";
+        double propertyValue;
+        int financingTerm;
+        double annualInterestRate;
+
         ArrayList<Financing> financingList = readFinancing(fileName);
 
         InterfaceUser interfaceUser = new InterfaceUser();
 
-        double propertyValue = interfaceUser.inputPropertyValue();
-        int financingTerm = interfaceUser.inputFinancingTerm();
-        double annualInterestRate = interfaceUser.inputAnnualInterestRate();
+        int financingType = interfaceUser.inputFinancingType();
+        switch (financingType){
+            case 1: // apartment
+                propertyValue = interfaceUser.inputPropertyValue();
+                financingTerm = interfaceUser.inputFinancingTerm();
+                annualInterestRate = interfaceUser.inputAnnualInterestRate();
+                int garageSpace = interfaceUser.inputGarageSpace();
+                int floorNumber = interfaceUser.inputFloorNumber();
 
-        Financing firstApartmentFinancing = new Apartment(propertyValue, financingTerm, annualInterestRate, 15, 7);
-        financingList.add(firstApartmentFinancing);
+                Financing apartmentFinancing = new Apartment(propertyValue, financingTerm, annualInterestRate, garageSpace, floorNumber);
+                financingList.add(apartmentFinancing);
+                break;
+            case 2: // house
+                propertyValue = interfaceUser.inputPropertyValue();
+                financingTerm = interfaceUser.inputFinancingTerm();
+                annualInterestRate = interfaceUser.inputAnnualInterestRate();
+                double houseArea = interfaceUser.inputHouseArea();
+                double landArea = interfaceUser.inputLandArea();
+
+                Financing houseFinancing = new House(propertyValue, financingTerm, annualInterestRate, houseArea, landArea);
+                financingList.add(houseFinancing);
+                break;
+            case 3: // land
+                propertyValue = interfaceUser.inputPropertyValue();
+                financingTerm = interfaceUser.inputFinancingTerm();
+                annualInterestRate = interfaceUser.inputAnnualInterestRate();
+                boolean areaType = interfaceUser.inputAreaType();
+
+                Financing landFinancing = new Land(propertyValue, financingTerm, annualInterestRate, (areaType ? "Residential" : "Commercial"));
+                financingList.add(landFinancing);
+                break;
+        }
 
         createSomeFinancing(financingList);
 
