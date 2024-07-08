@@ -39,4 +39,6 @@ public abstract class Financing implements Serializable {
     public abstract double calcTotalPayment();
 
     public abstract void printFinancingData();
+
+    public abstract String toString();
 }

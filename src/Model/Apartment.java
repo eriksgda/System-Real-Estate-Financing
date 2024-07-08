@@ -48,4 +48,20 @@ public class Apartment extends Financing {
         System.out.println("Monthly payment of financing: R$ " + NumberFormat.getCurrencyInstance().format(calcMonthlyPayment()));
         System.out.println("Total payment of financing: R$ " + NumberFormat.getCurrencyInstance().format(calcTotalPayment()));
     }
+
+    // string builder method to file writer
+    @Override
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Type  of financing: Land\n");
+        stringBuilder.append("Floor number: ").append(getFloorNumber()).append('\n');
+        stringBuilder.append("Number of garage space: ").append(getGarageSpace()).append('\n');
+        stringBuilder.append("Property value: R$ ").append(NumberFormat.getCurrencyInstance().format(getPropertyValue())).append('\n');
+        stringBuilder.append("Financing term: ").append(getFinancingTerm()).append(" year(s)\n");
+        stringBuilder.append("Annual interest rate: ").append(getAnnualInterestRate()).append("%\n");
+        stringBuilder.append("Monthly payment of financing: R$ ").append(NumberFormat.getCurrencyInstance().format(calcMonthlyPayment())).append("\n");
+        stringBuilder.append("Total payment of financing: R$ ").append(NumberFormat.getCurrencyInstance().format(calcTotalPayment())).append("\n");
+
+        return stringBuilder.toString();
+    }
 }
