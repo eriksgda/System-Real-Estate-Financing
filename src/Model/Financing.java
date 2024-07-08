@@ -1,6 +1,12 @@
 package Model;
 
-public abstract class Financing {
+import java.io.Serial;
+import java.io.Serializable;
+
+public abstract class Financing implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     protected double propertyValue;   // valor do imóvel
     protected int financingTerm;  // prazo do financiamento
     protected double annualInterestRate;  // taxa de juros anual
