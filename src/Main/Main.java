@@ -7,12 +7,6 @@ import java.util.ArrayList;
 import Model.*;
 import Util.*;
 
-// Professor, estava tentando fazer com o objectInputStream e o append = true, porém dava erro na leitura, a forma que encontrei para
-// arrumar me pareceu longo demais (https://www.geeksforgeeks.org/how-to-fix-java-io-streamcorruptedexception-invalid-type-code-in-java/),
-// então, optei por fazer sem o append = true, passando os dados do arquivo pra uma arraylist e depois sobrescrevendo por cima,
-// ou seja, peguei os dados adicionei os novos e escrevi todos desde o começo no mesmo arquivo. Acredito que não é a melhor forma, já
-// que quando se inicializa o programa, caso não exista o arquivo, vai dar o erro de FileNotFoundException, ainda assim, acredito
-// que cumpra todos os requisitos pedidos no projeto.
 
 public class Main {
     // write method (ObjectOutputStream)
@@ -116,78 +110,87 @@ public class Main {
         double propertyValue;
         int financingTerm;
         double annualInterestRate;
+        int financingType;
 
         ArrayList<Financing> financingList = readFinancing(fileName); // Arraylist for .test
         ArrayList<Financing> financingListTxt = new ArrayList<>(); // ArrayList for .txt
 
+        InterfaceSystem interfaceSystem = new InterfaceSystem();
         InterfaceUser interfaceUser = new InterfaceUser();
 
-        int financingType = interfaceUser.inputFinancingType();
-        switch (financingType){
-            case 1: // apartment
-                propertyValue = interfaceUser.inputPropertyValue();
-                financingTerm = interfaceUser.inputFinancingTerm();
-                annualInterestRate = interfaceUser.inputAnnualInterestRate();
-                int garageSpace = interfaceUser.inputGarageSpace();
-                int floorNumber = interfaceUser.inputFloorNumber();
+        do {
+            financingType = interfaceSystem.inputFinancingType();
+            switch (financingType) {
+                case 1: // apartment
+                    propertyValue = interfaceUser.inputPropertyValue();
+                    financingTerm = interfaceUser.inputFinancingTerm();
+                    annualInterestRate = interfaceUser.inputAnnualInterestRate();
+                    int garageSpace = interfaceUser.inputGarageSpace();
+                    int floorNumber = interfaceUser.inputFloorNumber();
 
-                Financing apartmentFinancing = new Apartment(propertyValue, financingTerm, annualInterestRate, garageSpace, floorNumber);
-                financingList.add(apartmentFinancing);
-                financingListTxt.add(apartmentFinancing);
+                    Financing apartmentFinancing = new Apartment(propertyValue, financingTerm, annualInterestRate, garageSpace, floorNumber);
+                    financingList.add(apartmentFinancing);
+                    financingListTxt.add(apartmentFinancing);
 
-                break;
-            case 2: // house
-                propertyValue = interfaceUser.inputPropertyValue();
-                financingTerm = interfaceUser.inputFinancingTerm();
-                annualInterestRate = interfaceUser.inputAnnualInterestRate();
-                double houseArea = interfaceUser.inputHouseArea();
-                double landArea = interfaceUser.inputLandArea();
+                    break;
+                case 2: // house
+                    propertyValue = interfaceUser.inputPropertyValue();
+                    financingTerm = interfaceUser.inputFinancingTerm();
+                    annualInterestRate = interfaceUser.inputAnnualInterestRate();
+                    double houseArea = interfaceUser.inputHouseArea();
+                    double landArea = interfaceUser.inputLandArea();
 
-                Financing houseFinancing = new House(propertyValue, financingTerm, annualInterestRate, houseArea, landArea);
-                financingList.add(houseFinancing);
-                financingListTxt.add(houseFinancing);
-                break;
-            case 3: // land
-                propertyValue = interfaceUser.inputPropertyValue();
-                financingTerm = interfaceUser.inputFinancingTerm();
-                annualInterestRate = interfaceUser.inputAnnualInterestRate();
-                boolean areaType = interfaceUser.inputAreaType();
+                    Financing houseFinancing = new House(propertyValue, financingTerm, annualInterestRate, houseArea, landArea);
+                    financingList.add(houseFinancing);
+                    financingListTxt.add(houseFinancing);
+                    break;
+                case 3: // land
+                    propertyValue = interfaceUser.inputPropertyValue();
+                    financingTerm = interfaceUser.inputFinancingTerm();
+                    annualInterestRate = interfaceUser.inputAnnualInterestRate();
+                    boolean areaType = interfaceUser.inputAreaType();
 
-                Financing landFinancing = new Land(propertyValue, financingTerm, annualInterestRate, (areaType ? "Residential" : "Commercial"));
-                financingList.add(landFinancing);
-                financingListTxt.add(landFinancing);
-                break;
-        }
+                    Financing landFinancing = new Land(propertyValue, financingTerm, annualInterestRate, (areaType ? "Residential" : "Commercial"));
+                    financingList.add(landFinancing);
+                    financingListTxt.add(landFinancing);
+                    break;
+                case 4:
+                    break;
+            }
 
-        createSomeFinancing(financingList);
-        createSomeFinancing(financingListTxt);
+            if (financingType != 4){
+                createSomeFinancing(financingList);
+                createSomeFinancing(financingListTxt);
 
-        // Object Input/Output Stream
-        writeFinancing(fileName, financingList);
-        ArrayList<Financing> financingListData = readFinancing(fileName);
+                // Object Input/Output Stream
+                writeFinancing(fileName, financingList);
+                ArrayList<Financing> financingListData = readFinancing(fileName);
 
-        System.out.println("-> Print with Object Input Stream (.test):\n");
+                System.out.println("-> Print with Object Input Stream (.test):\n");
 
-        for (Financing financing : financingListData){
-            financing.printFinancingData();
-            System.out.println();
+                for (Financing financing : financingListData) {
+                    financing.printFinancingData();
+                    System.out.println();
 
-            totalPropertyValue += financing.getPropertyValue();
-            totalFinancingValue += financing.calcTotalPayment();
-        }
+                    totalPropertyValue += financing.getPropertyValue();
+                    totalFinancingValue += financing.calcTotalPayment();
+                }
 
-        // File Writer/Reader
-        System.out.println("-> Print with File Reader (.txt): \n");
+                // File Writer/Reader
+                System.out.println("-> Print with File Reader (.txt): \n");
 
-        for (Financing financing : financingListTxt){
-            writeFile(fileNameTxt, financing);
-        }
+                for (Financing financing : financingListTxt) {
+                    writeFile(fileNameTxt, financing);
+                }
 
-        readFile(fileNameTxt);
+                readFile(fileNameTxt);
 
-        System.out.printf("\nTotal property value: %s Total Financing Value: %s",
-                NumberFormat.getCurrencyInstance().format(totalPropertyValue),
-                NumberFormat.getCurrencyInstance().format(totalFinancingValue));
+                System.out.printf("\nTotal property value: %s Total Financing Value: %s\n\n",
+                        NumberFormat.getCurrencyInstance().format(totalPropertyValue),
+                        NumberFormat.getCurrencyInstance().format(totalFinancingValue));
+            }
 
+        } while (financingType != 4);
+        System.out.println("finishing the simulator...");
     }
 }

@@ -15,29 +15,6 @@ public class InterfaceUser {
         }
     }
 
-    // input financing type method
-    public int inputFinancingType(){
-        int value = 0;
-        do{
-            System.out.println("""
-                    Enter the Financing Type:\s
-                    [1] APARTMENT
-                    [2] HOUSE
-                    [3] LAND
-                    R:\s""");
-            try{
-                value = scanner.nextInt();
-                validation(value, "Please enter 1, 2 or 3 for the Financing Type.");
-            }catch (InputMismatchException exception){
-                System.out.println("Invalid input. Please enter a numeric value for the Financing Type.");
-                scanner.next();
-            } catch (InputNegativeValueException exception) {
-                System.out.println(exception.getMessage());
-            }
-
-        }while (value != 1 && value != 2 && value != 3);
-        return value;
-    }
 
     // input property value method (for all financing)
     public double inputPropertyValue(){
